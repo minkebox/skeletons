@@ -1,0 +1,178 @@
+{
+  name: `LAN Cache`,
+  description: `Cache Windows, iOS, Steam and other downloads for multiple computers`,
+  images: {
+    x64: `lancachenet/monolithic`
+  },
+  tags: [ 'Caches' ],
+  actions: [
+    {
+      type: `Header`,
+      title: `Cache configuration`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_MEM_SIZE`,
+      description: `In memory cache size`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_DISK_SIZE`,
+      description: `Disk cache size`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_MAX_AGE`,
+      description: `Maximum cache age`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_DOMAINS_REPO`,
+      description: `Git repo list of domains to cache`
+    }
+  ],
+  properties: [
+    {
+      type: `Directory`,
+      name: `/data/cache`,
+      style: 'store',
+    },
+    {
+      type: `Directory`,
+      name: `/data/cachedomains`,
+      style: 'store',
+    },
+    {
+      type: `Directory`,
+      name: `/data/logs`,
+      style: 'store'
+    },
+    {
+      type: `Directory`,
+      name: `/var/www`,
+      style: 'store'
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_MEM_SIZE`,
+      defaultValue: `50m`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_DISK_SIZE`,
+      defaultValue: `50000m`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_MAX_AGE`,
+      defaultValue: `14d`
+    },
+    {
+      type: `Environment`,
+      name: `CACHE_DOMAINS_REPO`,
+      defaultValue: `https://github.com/aanon4/cache-domains.git`
+    },
+    {
+      type: `Environment`,
+      name: `BEAT_TIME`,
+      defaultValue: `1h`
+    },
+    {
+      type: `Environment`,
+      name: `LOGFILE_RETENTION`,
+      defaultValue: `14`
+    },
+    {
+      type: `Environment`,
+      name: `NGINX_WORKER_PROCESSES`,
+      defaultValue: `auto`
+    },
+    {
+      type: `Port`,
+      name: `80/tcp`,
+      port: 80,
+      protocol: `TCP`,
+      nat: false,
+      web: false,
+      dns: false,
+      mdns: null
+    },
+    {
+      type: `Port`,
+      name: `443/tcp`,
+      port: 443,
+      protocol: `TCP`,
+      nat: false,
+      web: false,
+      dns: false,
+      mdns: null
+    },
+    {
+      type: `Port`,
+      name: `53/tcp`,
+      port: 53,
+      protocol: `UDP`,
+      nat: false,
+      web: false,
+      dns: {
+        priority: 7,
+        delay: 60
+      },
+      mdns: null
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      defaultValue: `home`
+    }
+  ],
+  secondary: [
+    {
+      images: {
+        x64: `lancachenet/lancache-dns`
+      },
+      properties: [
+        {
+          type: `Environment`,
+          name: `USE_GENERIC_CACHE`,
+          defaultValue: `true`
+        },
+        {
+          type: `Environment`,
+          name: `LANCACHE_IP`,
+          defaultValue: `{{__HOMEIP}}`
+        },
+        {
+          type: `Environment`,
+          name: `LANCACHE_DNSDOMAIN`,
+          defaultValue: `{{__DOMAINNAME}}`
+        },
+        {
+          type: 'Environment',
+          name: 'UPSTREAM_DNS',
+          defaultValue: '0.0.0.0'
+        },
+        {
+          type: `Environment`,
+          name: `CACHE_DOMAINS_REPO`,
+          defaultValue: `https://github.com/aanon4/cache-domains.git`
+        }
+      ]
+    },
+    {
+      images: {
+        x64: `lancachenet/sniproxy`
+      },
+      properties: [
+      ]
+    }
+  ],
+  monitor: {
+    cmd: ``,
+    polling: 0,
+    parser: ``,
+    minwidth: `200px`,
+    header: ``,
+    template: ``
+  }
+}

@@ -1,0 +1,72 @@
+{
+  name: `Blog`,
+  description: `Blogging using the Ghost publishing platform`,
+  images: {
+    x64: `ghost:alpine`
+  },
+  tags: [
+    `Blog`,
+    `Web`
+  ],
+  actions: [
+    {
+      type: `Header`,
+      title: `Configuration`
+    },
+    {
+      type: `Environment`,
+      name: `url`,
+      description: `Base URL of this blog`
+    }
+  ],
+  properties: [
+    {
+      type: `Environment`,
+      name: `url`,
+      update: [
+        {
+          type: 'Port',
+          name: '2368/tcp',
+          path: 'web.url'
+        }
+      ]
+    },
+    {
+      type: `Directory`,
+      name: `/var/lib/ghost/content`,
+      style: `store`,
+      shares: [
+        {
+          name: `/`,
+          description: `Blog`
+        }
+      ]
+    },
+    {
+      type: `Port`,
+      name: `2368/tcp`,
+      port: 2368,
+      protocol: `TCP`,
+      nat: false,
+      web: {
+        type: `url`,
+        url: `about:blank`
+      },
+      dns: false,
+      mdns: null
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      defaultValue: `home`
+    }
+  ],
+  monitor: {
+    cmd: ``,
+    polling: 0,
+    parser: ``,
+    minwidth: `200px`,
+    header: ``,
+    template: ``
+  }
+}

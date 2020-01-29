@@ -1,0 +1,118 @@
+{
+  name: `Wiki.js`,
+  description: `A modern, lightweight and powerful wiki app`,
+  images: {
+    x64: `requarks/wiki:2`,
+    arm64: `requarks/wiki:2.0-arm`
+  },
+  tags: [
+    'Wiki',
+    'Web'
+  ],
+  delay: 10,
+  actions: [
+    {
+      type: `Header`,
+      title: `Nothing to configuration`
+    }
+  ],
+  properties: [
+    {
+      type: `Environment`,
+      name: `DB_TYPE`,
+      defaultValue: `postgres`
+    },
+    {
+      type: `Environment`,
+      name: `DB_HOST`,
+      defaultValue: `localhost`
+    },
+    {
+      type: `Environment`,
+      name: `DB_PORT`,
+      defaultValue: 5432
+    },
+    {
+      type: `Environment`,
+      name: `DB_USER`,
+      defaultValue: `wikijs`
+    },
+    {
+      type: `Environment`,
+      name: `DB_PASS`,
+      defaultValue: `wikijsrocks`
+    },
+    {
+      type: `Environment`,
+      name: `DB_NAME`,
+      defaultValue: `wiki`
+    },
+    {
+      type: 'Directory',
+      name: '/wiki/data',
+      style: 'store',
+      shares: [
+        { name: 'repo', description: 'Wiki.js Repo' },
+        { name: 'cache', description: 'Wiki.js Cache' },
+        { name: 'uploads', description: 'Wiki.js Uploads' },
+        { name: 'secure', description: 'Wiki.js Secure' }
+      ]
+    },
+    {
+      type: `Port`,
+      name: `3000/tcp`,
+      port: 3000,
+      protocol: `TCP`,
+      nat: false,
+      web: {
+        type: 'newtab',
+        path: '/'
+      },
+      dns: false,
+      mdns: null
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      defaultValue: `home`
+    }
+  ],
+  secondary: [
+    {
+      image: `postgres:11-alpine`,
+      delay: 0,
+      properties: [
+        {
+          type: `Environment`,
+          name: `POSTGRES_DB`,
+          defaultValue: `wiki`
+        },
+        {
+          type: `Environment`,
+          name: `POSTGRES_USER`,
+          defaultValue: `wikijs`
+        },
+        {
+          type: `Environment`,
+          name: `POSTGRES_PASSWORD`,
+          defaultValue: `wikijsrocks`
+        },
+        {
+          type: 'Directory',
+          name: '/var/lib/postgresql/data',
+          shares: [
+            { name: '/', description: 'Wiki.js Postgres DB' }
+          ]
+        }
+      ]
+    }
+  ],
+  monitor: {
+    cmd: ``,
+    polling: 0,
+    parser: ``,
+    minwidth: `200px`,
+    header: ``,
+    template: ``
+  }
+}
