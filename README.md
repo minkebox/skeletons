@@ -11,4 +11,5 @@ Current skeletons include:
 * [Discourse](https://www.discourse.org/) - Discussion forums
 * [Apache](https://httpd.apache.org/) - Web server
 * [Lan Cache](https://lancache.net/) - Steam, Windows and general game cache
-* [Minecraft](https://hub.docker.com/r/itzg/minecraft-server) Server - Configurable Minecraft server
+* [Minecraft Server](https://hub.docker.com/r/itzg/minecraft-server) - Configurable Minecraft server
+* [Plex](https://www.plex.tv/) - Media server
