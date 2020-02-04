@@ -13,3 +13,5 @@ Current skeletons include:
 * [Lan Cache](https://lancache.net/) - Steam, Windows and general game cache
 * [Minecraft Server](https://hub.docker.com/r/itzg/minecraft-server) - Configurable Minecraft server
 * [Plex](https://www.plex.tv/) - Media server
+* [Sonarr](https://sonarr.tv/) - TV shows
+* [Radarr](https://radarr.video/) - Movies
