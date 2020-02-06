@@ -1,0 +1,122 @@
+{
+  name: `Secure FTP`,
+  description: `Provide secure ftp (sftp) access to selected folders and files`,
+  images: {
+    x64: `amimof/sftp`
+  },
+  tags: [ 'Utilities' ],
+  actions: [
+    {
+      type: `Header`,
+      title: `User`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_USERNAME`,
+      description: `Select the user's login name`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_PASSWORD`,
+      description: `Select the user's password`
+    },
+    {
+      type: `Header`,
+      title: `Folders`
+    },
+    {
+      type: `Shareables`,
+      name: `/home/{{SSH_USERNAME}}`,
+      description: `Select the folders to share with this user`
+    },
+    {
+      type: 'Header',
+      title: 'Network',
+    },
+    {
+      type: 'Text',
+      text: 'Select which network this application will use. You probably want <b>home</b> unless this application is being used on a private network.'
+    },
+    {
+      type: 'Network',
+      name: 'primary',
+      description: 'Select network'
+    },
+    {
+      type: `Header`,
+      title: `Advanced`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_PORT`,
+      description: `Select the SSH port (usually 22)`
+    },
+    {
+      type: `NAT`,
+      description: `Make available on the Internet with the name <div><b>{{__GLOBALNAME}}</b></div>`,
+      visible: 'property["Network#primary"] === "home"'
+    }
+  ],
+  properties: [
+    {
+      type: `Environment`,
+      name: `SSH_USERNAME`,
+      defaultValue: `sftpuser`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_USERID`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_DATADIR_NAME`,
+      defaultValue: `../../tmp/ignore`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_GENERATE_HOSTKEYS`,
+      defaultValue: `true`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_PASSWORD`,
+      defaultValue: `sftppassword`
+    },
+    {
+      type: `Environment`,
+      name: `SSH_PORT`,
+      defaultValue: 22
+    },
+    {
+      type: `Environment`,
+      name: `LOGLEVEL`
+    },
+    {
+      type: `Environment`,
+      name: `DEBUG`
+    },
+    {
+      type: `Port`,
+      name: `SSH_PORT`,
+      port: `{{SSH_PORT}}`,
+      protocol: `TCP`,
+      nat: `{{__NAT}}`,
+      vpn: true,
+      web: false,
+      dns: false,
+      mdns: {
+        type: `_sftp-ssh._tcp`
+      }
+    },
+    {
+      type: `Directory`,
+      name: `/etc/ssh/host_keys`,
+      style: 'boot'
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      defaultValue: `home`
+    }
+  ]
+}
