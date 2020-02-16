@@ -16,6 +16,15 @@
       type: `Shareables`,
       name: `/FOLDERS`,
       description: `Select folders`
+    },
+    {
+      type: `Text`,
+      text: `Select which applications you want to synchronize. The specific synchronization is controlled in the app itself.`
+    },
+    {
+      type: `Backups`,
+      name: `/APPLICATIONS`,
+      description: `Select applications`
     }
   ],
   properties: [
@@ -27,6 +36,11 @@
     {
       type: `Directory`,
       name: `/FOLDERS`,
+      style: `store`
+    },
+    {
+      type: `Directory`,
+      name: `/APPLICATIONS`,
       style: `store`
     },
     {
