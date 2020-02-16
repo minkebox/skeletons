@@ -19,7 +19,7 @@
     },
     {
       type: `Text`,
-      text: `Select which applications you want to synchronize. The specific synchronization is controlled in the app itself.`
+      text: `Select which applications you want to synchronize.`
     },
     {
       type: `Backups`,
@@ -35,13 +35,11 @@
     },
     {
       type: `Directory`,
-      name: `/FOLDERS`,
-      style: `store`
+      name: `/FOLDERS`
     },
     {
       type: `Directory`,
-      name: `/APPLICATIONS`,
-      style: `store`
+      name: `/APPLICATIONS`
     },
     {
       type: `Directory`,
