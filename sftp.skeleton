@@ -25,7 +25,7 @@
       title: `Folders`
     },
     {
-      type: `Shareables`,
+      type: `SelectShares`,
       name: `/home/{{SSH_USERNAME}}`,
       description: `Select the folders to share with this user`
     },
@@ -100,6 +100,11 @@
     {
       type: `Environment`,
       name: `DEBUG`
+    },
+    {
+      type: `Directory`,
+      name: `/home/{{SSH_USERNAME}}`,
+      style: `virtual`
     },
     {
       type: `Port`,
