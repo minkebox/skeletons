@@ -62,12 +62,10 @@
       name: `8384/tcp`,
       port: 8384,
       protocol: `TCP`,
-      nat: false,
       web: {
         type: `newtab`,
         path: `/`
       },
-      dns: false,
       mdns: {
         type: `_http._tcp`
       }
@@ -77,18 +75,12 @@
       name: `22000/tcp`,
       port: 22000,
       protocol: `TCP`,
-      nat: false,
-      web: false,
-      dns: false
     },
     {
       type: `Port`,
       name: `21027/udp`,
       port: 21027,
       protocol: `UDP`,
-      nat: false,
-      web: false,
-      dns: false
     },
     {
       type: `Network`,
