@@ -1,0 +1,108 @@
+{
+  name: `Shlink`,
+  description: `The URL shortener`,
+  uuid: `F7797C18-1202-4D79-8EE2-32FBD8B44D5B`,
+  image: `shlinkio/shlink-web-client`,
+  tags: [
+    `Web`,
+    `Utilities`
+  ],
+  actions: [
+    {
+      type: `Header`,
+      title: `Configuration`
+    },
+    {
+      type: `EditEnvironment`,
+      name: `SHORT_DOMAIN_HOST`,
+      description: `Shortening domain name`
+    },
+    {
+      type: `EditEnvironment`,
+      name: `API_KEY`,
+      description: `API key for Shlink instance`
+    },
+    {
+      type: `EditEnvironment`,
+      name: `GEOLITE_LICENSE_KEY`,
+      description: `GeoLite2 API key`
+    }
+  ],
+  properties: [
+    {
+      type: `File`,
+      name: `/usr/share/nginx/html/servers.json`,
+      value: `{{serverjson}}`
+    },
+    {
+      type: `Port`,
+      name: `80/tcp`,
+      protocol: `TCP`,
+      port: 80,
+      web: {
+        tab: `newtab`,
+        path: `/`,
+        private: true
+      }
+    },
+    {
+      type: `Port`,
+      name: `8080/tcp`,
+      protocol: `TCP`,
+      port: 8080,
+      web: {
+      }
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      value: `home`
+    }
+  ],
+  secondary: [
+    {
+      image: `shlinkio/shlink:stable`,
+      properties: [
+        {
+          type: `Environment`,
+          name: `SHORT_DOMAIN_HOST`
+        },
+        {
+          type: `Environment`,
+          name: `SHORT_DOMAIN_SCHEMA`,
+          value: `https`
+        },
+        {
+          type: `Environment`,
+          name: `GEOLITE_LICENSE_KEY`
+        },
+        {
+          type: `File`,
+          name: `/etc/shlink/data/database.sqlite`,
+          style: `store`
+        },
+        {
+          type: `Directory`,
+          name: `/etc/shlink/config/params`
+        }
+      ]
+    }
+  ],
+  monitor: {
+    cmd: ``,
+    init: ``
+  },
+  constants: [
+    {
+      name: `serverjson`,
+      value: `[
+  {
+    "name": {{'"' + SHORT_DOMAIN_HOST + '"'}},
+    "url": {{'"http://' + __HOMEIP + ':8080/"'}},
+    "apiKey": {{'"' + API_KEY + '"'}}
+  }
+]
+`
+    }
+  ]
+}
