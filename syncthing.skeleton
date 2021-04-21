@@ -64,7 +64,7 @@
       port: 8384,
       protocol: `TCP`,
       web: {
-        tab: `inline`,
+        tab: `newtab`,
         path: `/`
       },
       mdns: {
