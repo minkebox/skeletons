@@ -1,0 +1,45 @@
+{
+  name: `OpenSpeedTest`,
+  description: `Network speed test`,
+  uuid: `3401EE6A-C5DD-4A7F-AF99-E6DFB87A5453`,
+  image: `openspeedtest/latest`,
+  tags: [
+    `Monitoring`,
+    `Networking`
+  ],
+  actions: [
+    {
+      type: `Header`,
+      title: `External Network`
+    },
+    {
+      type: `SelectNetwork`,
+      name: `primary`,
+      description: `Select which network the application will use.`
+    },
+    {
+      type: `EditEnvironmentAsCheckbox`,
+      name: `NAT`,
+      description: `Open network port in NAT.`,
+      initValue: false
+    }
+  ],
+  properties: [
+    {
+      type: `Port`,
+      name: `tcp/3000`,
+      port: 3000,
+      protocol: `TCP`,
+      nat: `{{NAT}}`,
+      web: {
+        type: `newtab`,
+        path: `/`
+      }
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      value: `home`
+    }
+  ]
+}
