@@ -78,8 +78,8 @@
       port: 80,
       protocol: `TCP`,
       web: {
-        tab: `inline`,
-        widget: `inline`,
+        tab: `newtab`,
+        widget: `newtab`,
         path: `/admin/`
       }
     },

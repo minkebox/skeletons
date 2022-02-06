@@ -70,7 +70,7 @@
       port: 80,
       protocol: `TCP`,
       web: {
-        tab: `inline`,
+        tab: `newtab`,
         path: `/`
       }
     },

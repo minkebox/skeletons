@@ -92,8 +92,8 @@
       port: 9000,
       protocol: `TCP`,
       web: {
-        tab: `inline`,
-        widget: `inline`,
+        tab: `newtab`,
+        widget: `newtab`,
         path: `/`
       }
     },
