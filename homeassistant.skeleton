@@ -1,0 +1,37 @@
+{
+  name: `Home Assistant`,
+  description: `Home automation platform`,
+  uuid: `74C48180-AB58-42F3-A7FC-F9A3E6D66D99`,
+  image: `ghcr.io/home-assistant/home-assistant:stable`,
+  tags: [
+    `HomeKit`
+  ],
+  actions: [
+  ],
+  properties: [
+    {
+      type: `Feature`,
+      name: `localtime`,
+    },
+    {
+      type: `Directory`,
+      name: `/config`,
+      style: `store`
+    },
+    {
+      type: `Port`,
+      name: `tcp/8123`,
+      port: 8123,
+      protocol: `TCP`,
+      web: {
+        type: `newtab`,
+        path: `/`
+      }
+    },
+    {
+      type: `Network`,
+      name: `primary`,
+      value: `home`
+    }
+  ]
+}
